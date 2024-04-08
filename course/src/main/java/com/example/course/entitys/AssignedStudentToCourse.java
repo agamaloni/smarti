@@ -6,31 +6,22 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.util.List;
-
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "COURSE")
-public class Course {
-
+@IdClass(AssignKey.class)
+@Table(name = "STUDENT_AT_COURSE")
+public class AssignedStudentToCourse {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_id")
-    Long courseId;
+    @ManyToOne(optional = false,cascade = CascadeType.ALL,targetEntity = Course.class)
+    private Long courseId;
+    @Id
+    @ManyToOne(optional = false,cascade = CascadeType.ALL,targetEntity = Student.class)
+    private Long studentId;
 
-    @Column(name = "course_name", nullable = false)
-    String courseName;
-
-    @Column(name = "teacher_id", nullable = false)
-    Long teacherId;
-
-    @OneToMany(mappedBy = "courseId",cascade = CascadeType.ALL)
-    private List<AssignedStudentToCourse> assignedStudents;
-
-    @CreatedDate()
+    @CreatedDate
     @Column(name = "created_date",nullable = false, updatable = false)
     protected LocalDateTime createdDate;
 

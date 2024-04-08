@@ -1,18 +1,22 @@
 package com.example.course.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.*;
 
-@Builder
-@Table(name = "STUDENT")
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "STUDENT")
 public class Student extends Person {
 
-    @Column(name = "courses")
-    String courses;
+    @JsonIgnore
+    @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL)
+    List<AssignedStudentToCourse> assignedCourses;
 
 }
+
+
+
