@@ -1,6 +1,7 @@
 package com.challenge.smarti.services;
 
 import com.challenge.smarti.PersonPrioritiesConfig;
+import com.challenge.smarti.entities.Address;
 import com.challenge.smarti.entities.InterfaceEnum;
 import com.challenge.smarti.entities.PersonBaseEntity;
 import com.challenge.smarti.mapper.JsonToPersonsMapper;
@@ -19,12 +20,11 @@ import java.util.function.Supplier;
 @Getter
 @Service
 public class PersonMergeService {
-
     private PersonPrioritiesConfig personPrioritiesConfig;
     private JsonToPersonsMapper jsonToPersonsMapper;
 
     public PersonBaseEntity mergeEntities(List<PersonBaseEntity> entities) {
-        if(entities.size() != 2) throw new IllegalArgumentException("Expected 2 interfaces of type PersonBaseEntity");
+        validateList(entities);
 
         // Initialize the merged entity with the first nd second entity in the list
         PersonBaseEntity C2Person = null;
@@ -37,11 +37,10 @@ public class PersonMergeService {
             webintPerson = entities.get(0);
         }
 
-        Map<String, List<String>> personInterfaceTypePriorities = personPrioritiesConfig.getPersonInterfaceTypePriorities();
-        PersonBaseEntity mergedPersonByPriority = new PersonBaseEntity();
+        Map<String, List<String>> personInterfaceTypePriorities = personPrioritiesConfig.getPriorities();
+        PersonBaseEntity mergedPersonByPriority = createPersonBaseEntity();
 
         if(C2Person != null && webintPerson != null) {
-
             // Merge logic based on priorities from YAML configuration
             mergeFieldWithPriorityStrings(C2Person::getTz, webintPerson::getTz, mergedPersonByPriority::setTz, "tz", personInterfaceTypePriorities);
             mergeFieldWithPriorityStrings(C2Person::getName, webintPerson::getName, mergedPersonByPriority::setName, "name", personInterfaceTypePriorities);
@@ -52,6 +51,18 @@ public class PersonMergeService {
             mergeFieldWithPriorityStrings(C2Person.getAddress()::getRegion, webintPerson.getAddress()::getRegion, mergedPersonByPriority.getAddress()::setRegion, "address.region", personInterfaceTypePriorities);
         }
         return mergedPersonByPriority;
+    }
+
+    private static PersonBaseEntity createPersonBaseEntity() {
+        PersonBaseEntity mergedPersonByPriority = new PersonBaseEntity();
+        mergedPersonByPriority.setAddress(new Address());
+        return mergedPersonByPriority;
+    }
+
+    private static void validateList(List<PersonBaseEntity> entities) {
+        if(entities.size() != 2) throw new IllegalArgumentException("Expected 2 interfaces only for merge entities");
+        if(!entities.get(0).getEntityType().equals("person") || !entities.get(1).getEntityType().equals("person"))
+            throw new IllegalArgumentException("Both entities must be of the same type - person");
     }
 
     private void mergeFieldWithPriorityStrings(Supplier<String> C2Person, Supplier<String> webintPerson, Consumer<String> mergedValueConsumer, String field, Map<String, List<String>> personInterfaceTypePriorities) {

@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = InterfaceTypeValidator.class)
 public @interface ValidInterfaceType {
-    String message() default "Invalid InterfaceType. Allowed values are C2 and WEBINT";
+    String message() default "Invalid InterfaceType. Allowed only valid interface types";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 

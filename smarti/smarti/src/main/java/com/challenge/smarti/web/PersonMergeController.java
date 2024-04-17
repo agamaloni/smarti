@@ -15,9 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/person")
 public class PersonMergeController {
-
     private PersonMergeService personMergeService;
-
     @PostMapping("/merge")
     public ResponseEntity<PersonBaseEntity> mergeEntities(@RequestBody @Valid String jsonString) {
         List<PersonBaseEntity> mergedEntity = personMergeService.getJsonToPersonsMapper().processJsonToPersonList(jsonString);

@@ -18,14 +18,10 @@ public class JsonToPersonsMapper {
     public List<PersonBaseEntity> processJsonToPersonList(@Valid String jsonString) {
         List<PersonBaseEntity> entities = new LinkedList<>();
         try {
-            // Deserialize JSON array into a list of PersonBaseEntity objects
             entities = objectMapper.readValue(jsonString, new TypeReference<>() {
             });
-
-            // Perform further operations with the merged entity or the list of entities
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            // Handle JSON processing exception
         }
         return entities;
     }

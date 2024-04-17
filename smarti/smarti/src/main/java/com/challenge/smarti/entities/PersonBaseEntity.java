@@ -1,7 +1,6 @@
 package com.challenge.smarti.entities;
 
 import com.challenge.smarti.validators.ValidInterfaceType;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -13,7 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonPOJOBuilder
 public class PersonBaseEntity {
     //We can make a base object regard this field for dynamic objects solution
     @NotBlank

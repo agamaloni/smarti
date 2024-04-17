@@ -1,3 +1,5 @@
+#priortiys
+entityType: person
 priorities:
   tz: [webint, c2]
   name: [webint, c2]
