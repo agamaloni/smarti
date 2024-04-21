@@ -34,40 +34,34 @@ class SmartiApplicationTests {
 				"[\n" +
 						"    {\n" +
 						"        \"entityType\": \"person\",\n" +
-						"        \"typeOfInterface\": \"c2\",\n" +
-						"        \"tz\": \"GMT\",\n" +
-						"        \"name\": \"Jerry Seinfeld\",\n" +
-						"        \"age\": \"69\",\n" +
-						"        \"address\": {\n" +
-						"            \"city\": \"New York City\",\n" +
-						"            \"region\": \"New York\"\n" +
+						"        \"interfaceType\": \"c2\",\n" +
+						"        \"attributes\": {\n" +
+						"            \"tz\": \"c2\",\n" +
+						"            \"name\": \"c2\",\n" +
+						"            \"age\": \"c2\",\n" +
+						"            \"address\": {\n" +
+						"                \"city\": \"c2\",\n" +
+						"                \"region\": \"c2\"\n" +
+						"            }\n" +
 						"        }\n" +
 						"    },\n" +
 						"    {\n" +
 						"        \"entityType\": \"person\",\n" +
-						"        \"typeOfInterface\": \"webint\",\n" +
-						"        \"tz\": \"GMT\",\n" +
-						"        \"name\": \"Julia Louis-Dreyfus\",\n" +
-						"        \"age\": \"63\",\n" +
-						"        \"address\": {\n" +
-						"            \"city\": \"Manhattan\",\n" +
-						"            \"region\": \"New York\"\n" +
+						"        \"interfaceType\": \"webint\",\n" +
+						"        \"attributes\": {\n" +
+						"            \"tz\": \"webint\",\n" +
+						"            \"name\": \"webint\",\n" +
+						"            \"age\": \"webint\",\n" +
+						"            \"address\": {\n" +
+						"                \"city\": \"webint\",\n" +
+						"                \"region\": \"webint\"\n" +
+						"            }\n" +
 						"        }\n" +
 						"    }\n" +
-						"]";
+						"]\n";
 
 
-		String expectedJsonAfterMerged = "{\n" +
-				"    \"entityType\": null,\n" +
-				"    \"typeOfInterface\": null,\n" +
-				"    \"tz\": \"GMT\",\n" +
-				"    \"name\": \"Julia Louis-Dreyfus\",\n" +
-				"    \"age\": 69,\n" +
-				"    \"address\": {\n" +
-				"        \"city\": \"New York City\",\n" +
-				"        \"region\": \"New York\"\n" +
-				"    }\n" +
-				"}";
+		String expectedJsonAfterMerged = "{\"tz\":\"webint\",\"name\":\"webint\",\"age\":\"c2\",\"address\":{\"city\":\"c2\",\"region\":\"webint\"}}";
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/person/merge")
 						.contentType(MediaType.APPLICATION_JSON)

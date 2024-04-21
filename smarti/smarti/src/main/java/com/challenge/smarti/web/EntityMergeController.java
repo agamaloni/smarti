@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.challenge.smarti.mapper.ConstantsHelper.ATTRIBUTES;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/person")
@@ -19,7 +21,7 @@ public class EntityMergeController {
     @PostMapping("/merge")
     public ResponseEntity<String> mergeEntities(@RequestBody String jsonString) throws JSONException {
         JSONArray listOfEntities = entityMergeService.getJsonToPersonsMapper().processJsonStringToListJson(jsonString);
-        JSONObject mergedEntity = entityMergeService.mergeEntities(listOfEntities,EntityMergeService.ATTRIBUTES);
+        JSONObject mergedEntity = entityMergeService.mergeEntities(listOfEntities,ATTRIBUTES);
         return ResponseEntity.ok(mergedEntity.toString());
     }
 }
