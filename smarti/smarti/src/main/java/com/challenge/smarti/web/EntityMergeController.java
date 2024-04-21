@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/person")
-public class EntitiyMergeController {
+public class EntityMergeController {
     private EntityMergeService entityMergeService;
     @PostMapping("/merge")
     public ResponseEntity<String> mergeEntities(@RequestBody String jsonString) throws JSONException {
         JSONArray listOfEntities = entityMergeService.getJsonToPersonsMapper().processJsonStringToListJson(jsonString);
-        JSONObject mergedEntity = entityMergeService.mergeEntities(listOfEntities,"attributes");
+        JSONObject mergedEntity = entityMergeService.mergeEntities(listOfEntities,EntityMergeService.ATTRIBUTES);
         return ResponseEntity.ok(mergedEntity.toString());
     }
 }
