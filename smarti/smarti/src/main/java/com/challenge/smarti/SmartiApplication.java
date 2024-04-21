@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SmartiApplication implements CommandLineRunner {
 
 	@Autowired
-	private PersonPrioritiesConfig personPrioritiesConfig;
+	private EntitiesPrioritiesConfig entitiesPrioritiesConfig;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SmartiApplication.class, args);
@@ -17,8 +17,7 @@ public class SmartiApplication implements CommandLineRunner {
 
 	//for dev test propose only - loading context
 	public void run(String... args) throws Exception {
-		System.out.println("using EntityType: " + personPrioritiesConfig.getEntityType());
-		System.out.println("using Priorities: " + personPrioritiesConfig.getPriorities().toString());
+		System.out.println("Load entities config: " + entitiesPrioritiesConfig.getEntities().size());
 	}
 
 }

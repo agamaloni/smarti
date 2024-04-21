@@ -2,12 +2,36 @@ spring:
     application:
         name: smarti
 
-#priortiys
-entityType: person
-priorities:
-    tz: [webint, c2]
-    name: [webint, c2]
-    age: [c2, webint]
-    address:
-        city: [c2, webint]
-        region: [webint, c2]
+#priorties
+entities:
+    - entityType: person
+      attributes:
+          - name: tz
+            interfaces: [webint, c2]
+          - name: name
+            interfaces: [webint, c2]
+          - name: age
+            interfaces: [c2, webint]
+          - name: address
+            hasNested: true
+            nestedAttributes:
+              - name: city
+                interfaces: [ c2, webint ]
+              - name: region
+                interfaces: [ webint, c2 ]
+    - entityType: car
+      attributes:
+          - name: tz
+            interfaces: [webint, c2]
+          - name: name
+            interfaces: [webint, c2]
+          - name: age
+            interfaces: [c2, webint]
+          - name: address
+            interfaces: null
+            hasNested: true
+            nestedAttributes:
+                - name: city
+                  interfaces: [c2, webint]
+                - name: region
+                  interfaces: [webint, c2]
