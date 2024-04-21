@@ -2,7 +2,7 @@ package com.challenge.smarti.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public enum InterfaceEnum {
+public enum InterfaceTypeEnum {
     @JsonProperty("webint")
     WEBINT,
     @JsonProperty("c2")

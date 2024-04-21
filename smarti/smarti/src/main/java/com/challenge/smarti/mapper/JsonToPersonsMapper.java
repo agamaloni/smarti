@@ -9,8 +9,6 @@ import static com.challenge.smarti.mapper.ConstantsHelper.*;
 
 @Component
 public class JsonToPersonsMapper {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-
     public JSONArray processJsonStringToListJson(String jsonString) throws JSONException {
         JSONArray jsonArray = new JSONArray(jsonString);
 

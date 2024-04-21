@@ -12,13 +12,12 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class BaseEntity {
-    //We can make a base object regard this field for dynamic objects solution
     @NotBlank
     private String entityType;
 
     @NotBlank
     @ValidInterfaceType
-    private InterfaceEnum interfaceType;
+    private InterfaceTypeEnum interfaceType;
 
     private List<Attribute> attributes;
 

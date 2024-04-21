@@ -2,7 +2,6 @@ package com.challenge.smarti.services;
 
 import com.challenge.smarti.EntitiesPrioritiesConfig;
 import com.challenge.smarti.entities.Attribute;
-import com.challenge.smarti.entities.BaseEntity;
 import com.challenge.smarti.entities.EntityConfig;
 import com.challenge.smarti.mapper.JsonToPersonsMapper;
 import lombok.AllArgsConstructor;
